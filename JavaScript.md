@@ -71,3 +71,41 @@ const checkWeight = weight => {
 Use function expressions when you need to limit the scope of the function, ie. not global scope like with the function keyword
 
 ## Arrays
+
+Unlike Arrays in C++, arrays in JavaScript can store variables of multiple types
+```js
+let arrName = [1, true, "asdf"];
+```
+### Array Length
+To get the length of an array, call `arr.length`
+```js
+const arr = [1, 2, 3];
+console.log(arr.length) //3
+```
+### Push and Pop
+By default, the `.push()` and `.pop()` methods treat the array as a stack. That is, elements are pushed to the back, and popped from the back. Note that `.pop()` also returns the element that is removed.
+
+```js
+const fruits = ['apple', 'oranges']
+fruits.push('pear') //fruits = ['apple', 'oranges', 'pear']
+fruits.pop() //fruits = ['apple', 'oranges'] and 'pear' is returned
+```
+
+### Other Methods
+
+```js
+arr.unshift()  //removes first element, and returns it
+arr.slice(start_idx, end_idx) // returns a shallow copy of a portion of the arr, non mutating
+arr.indexOf(element) //returns the index of an element
+```
+
+When arrays are passed into a function, they are essentially passed by reference
+
+### Sorting Arrays
+
+```js
+var points = [30, 1, 20]
+points.sort(function(a,b) { return a-b }); //sorts ascending
+points.sort(function(a,b) { return b-a }); //sorts descending
+```
+
