@@ -268,3 +268,82 @@ Object.keys(objName) //returns an array of all keys in objName
 Object.entries(objName) //returns and array of all key value pairs in objName
 Object.assign(target, source) //returns target object, and copies all properties from one or more source objects to target
 ```
+
+## Classes
+
+Constructors in JavaScript are simply called `constructor`. The `new` keyword marks the creation of an instance of a class.
+```js
+class Dog {
+    constructor(name) {
+        this._name = name;
+    }
+}
+//creates a new instance of the dog class
+const halley = new Dog("Halley");
+```
+
+In classes, commas are not required between methods.
+
+With static methods, you can limit access to the method to the class itself, and not on an instance of a class.
+
+```js
+class Animal {
+    constructor(name) {
+        this._name = name;
+    }
+    static func(){ 
+        //do something
+    }
+}
+```
+
+JavaScript supports inheritance, and it is done with the `extends` keyword. A child class constructor calls the parent class constructor with the `super()` method.
+```js
+class cat extends Animal {
+    constructor(name, usesLitter) {
+        super(name);
+        this._usesLitter = usesLitter;
+    }
+}
+```
+
+## Modules
+
+- Modules are reusable pieces of code that can be exported from one program and imported for use in another program.  
+
+### Importing and Exporting in Node.js
+The require function can be used to import code from another file into current scripts
+```js
+const moduleA = require("./module-a.js"); //note that the .js is optional
+```
+To export modules, assign the object to the `exports` property of `module`.
+```js
+let Airplane = {};
+Airplane.myAirplane = "StarJet";
+module.exports = Airplane;
+```
+### Importing and Exporting with ES6 JavaScript
+The `import` keyword can be used to import functions, and `export default` can be used to export singular objects/functions.
+
+```js
+//In "moduleA.js"
+let Menu = {}
+export default Menu;
+
+//In main.js
+import Menu from './moduleA.js';
+//now everything in Menu can be accessed
+```
+Here are some additional ways of importing/exporting with ES6
+```js
+//exporting by var names
+//"menu.js"
+let Specialty = "pasta";
+let food = "burgers";
+export {Specialty, food};
+//OR
+export {Specialty as chefsSpecial}; //now u import chefsSpecial, since it is an alias for Specialty
+
+//In main.js
+import {Specialty, food} from "./menu";
+```
