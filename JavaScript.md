@@ -347,3 +347,77 @@ export {Specialty as chefsSpecial}; //now u import chefsSpecial, since it is an 
 //In main.js
 import {Specialty, food} from "./menu";
 ```
+
+## Promises
+Pormises are objects that represent the eventual outcome of an asynchronous operation. A promise object can be in one of 3 states:
+- **Pending**: The initial state, where the value is not yet available
+- **Fulfulled**: The operation is successfully completed, and promise has resolved value
+- **Rejected**: The operation has failed 
+
+### Creating a JavaScript Promise Object
+Creating a promise object requires the use of the `new` keyword. The promise object constructor takes in an executor function as the argument. This function is responsible for resolving or rejecting the promise.
+```js
+const executorFunc = (resolve, reject) => {
+    resolve('Resolved');
+}
+const promise = new Promise(executorFunc);
+```
+
+As shown above, the executor function takes 2 functions as its arguments, the predefined `resolve()` and `reject()` functions.
+
+### setTimeout()
+`setTimeout()` is an asynchronous JavaScript function which executes a code block through a callback function after a set delay in ms.
+```js
+const loginAlert = () => {
+    alert('Login');
+}
+setTimeout(loginAlert, 6000);
+```
+
+### .then() method
+The `.then()` method of a JS promise object can be used to get the eventual result (or error) of the asynchronous operation. `.then()` accepts 2 function arguments, first one is called if resolved, second if rejected.
+
+```js
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Result');
+    }, 200)
+})
+
+Promise.then(handleSuccessFunc, hendlFailureFunc);
+```
+
+`.then()` methods can also be chained if the previous `.then()` method returns a Promise.
+
+### .catch() method for handling rejection
+
+The `.catch()` method of a JS promise object handles failures.
+
+```js
+Promise.then(handleSuccessFunc, handleFailureFunc);
+//can be refactored to
+Promise.then(handleSuccessFunc).catch(handleFailureFunc)
+```
+
+### Common Mistakes 
+1. Nesting Promises instead of chaining
+```js
+//DONT DO THIS!!
+returnsFirstPromise().then((firstResolveVal) => {
+    return returnsSecondValue(firstResolveVal)
+    .then((secondResolveVal) => {
+        console.log(secondResolveVal);
+    })
+})
+```
+It is always better to chain promises rather than nesting them
+
+2. Forgetting to `return` a promise  
+If chaining multiple promises, remember to `return` on all promises except for the last one, so there is logic to handle.
+
+### Promise.all()
+This method accepts an array of promises as argument, and returns a single promise. If **every** promise in the array resolve, the promise returned will resolve with an array containing the resolved value from each promise in the arg array. If **any one** function from the initial array rejects, the promise returned will immediately reject with the reason that promise rejected.
+
+```js
+let myPromises = Promise.all([returnsPromOne(), returnsPromTwo()]);
+```
