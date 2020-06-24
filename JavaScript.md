@@ -421,3 +421,40 @@ This method accepts an array of promises as argument, and returns a single promi
 ```js
 let myPromises = Promise.all([returnsPromOne(), returnsPromTwo()]);
 ```
+
+## Async Await
+### Async
+The `async` keyword is used to write functions that handle asynchronous actions. Async functions **always** return a promise. It can return in one of 3 ways:  
+1. If nothing is returned from the function, return a promise with resolved value of `undefined`
+2. If a non-promise value is returned from the function, return a promise resolved to that value
+3. If a promise is returned from the function, simply return that promise
+```js
+async function fivePromise() { return 5; }
+
+fivePromise().then(resolvedValue=> {
+    console.log(resolvedValue);
+}) //prints 5
+```
+### Await
+The `await` keyword can **only** be used inside an `aync` function. `await` is an operator that returns the resolved value of a promise. `await` halts or pauses the execution of our `async` function until the promise is resolved.
+```js
+async function asyncFuncExample() {
+    let resolvedValue = await myPromise(); //without await keyword, resolved value will be something like "Promise {<pending>}"
+    console.log(resolvedValue);
+}
+```
+
+The power of `async...await` lies within scenarios where we have a series of asynchronous actions which depend on one another. With native promise syntax, we would have to use a chain of `.then()` functions, but using `async...await` greatly simplifies the process.
+
+## Error Handling
+To handle errors with `async...await`, we can use `try...catch` statements. This way, we can catch both synchronous and asynchronous errors!
+```js
+async function hostDinnerParty() {
+    try {
+        let food = await cookBeanSouffle();
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+```
