@@ -458,3 +458,12 @@ async function hostDinnerParty() {
     }
 }
 ```
+
+
+# Misc 
+
+- parseInt() parses a string argument and returns an integer of the specified base
+
+```js
+const parsed = parseInt('0xF', 16); //parsed = 15
+```
